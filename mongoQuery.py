@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import streamlit as st
 
-client = MongoClient(st.secrets['pymongo_string'])
+client = MongoClient(st.secrets["mongo"]['pymongo_string'])
 db = client['5e-data'] 
 classes = db['classes']
 races = db['races']
