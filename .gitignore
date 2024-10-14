@@ -7,3 +7,4 @@ test.py
 output.pdf
 .vs/
 __pycache__/
+.gitignore
