@@ -8,3 +8,5 @@ output.pdf
 .vs/
 __pycache__/
 .gitignore
+.devcontainer
+campaigns/mystra

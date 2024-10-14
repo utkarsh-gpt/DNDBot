@@ -1,8 +1,9 @@
 from anthropic import Anthropic
 import os
 import json
+import streamlit as st
 
-client = Anthropic(api_key="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")
+client = Anthropic(st.secrets["anthropic"]["api_key"])
 MODEL = "claude-3-haiku-20240307"
 
 def generateResponse(filepaths, prompt):
