@@ -3,7 +3,7 @@ import os
 import json
 import streamlit as st
 
-client = Anthropic(st.secrets["anthropic"]["api_key"])
+client = Anthropic(api_key=st.secrets["anthropic"]["api_key"])
 MODEL = "claude-3-haiku-20240307"
 
 def generateResponse(filepaths, prompt):
