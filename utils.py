@@ -3,9 +3,13 @@ import os
 import json
 import streamlit as st
 
-client = Anthropic(api_key=st.secrets["anthropic"]["api_key"])
+@st.cache_resource
+def init_api():
+    client = Anthropic(api_key=st.secrets["anthropic"]["api_key"])
+    return client
 MODEL = "claude-3-haiku-20240307"
 
+client = init_api()
 def generateResponse(filepaths, prompt):
     data = {}
     messages = [{"role": "user", "content": []}]
