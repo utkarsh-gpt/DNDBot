@@ -1,0 +1,9 @@
+Pipfile
+Pipfile.lock
+.streamlit/
+5e-data/
+scrapers/
+test.py
+output.pdf
+.vs/
+__pycahce__/

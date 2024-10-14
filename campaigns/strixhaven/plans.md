@@ -1,0 +1,7 @@
+Following are what the characters can do next to uncover the mystery behind the black oily substance and uncover about Murgaxor and his identity.
+
+For a particular reason, Shulak invites the characters to have a  talk with Shulak’s dementia ridden great great great grandfather, who explains there was a evil student was good at his studies, a genius, but he started to skip classes and kept talking to his warlock Patron a lot and attending Alchemy club. 
+
+Students can go to a warlock professor to inquire about the ink. And she says the sample is too old and that her eldritch sense is unable to make out any magical essence from the oil.
+
+If and when characters are able to bring her the oil in time, see explains that the warlock Patron is most likely the insatiable, known for their blood corrupting powers. Basically anyone who is a warlock under the insatiable, their blood is essentially artificially made powerful which gives them alot more strength, intelligence, agility you name it. It also extends the warlock’s life. The warlock teacher also says “Its funny you brought it up as the insatiable had a large influence near the sedgemoor area where the frog people, bullywug resided. I had to go and ‘clear up’ some of those contracts to make the campus safer”. The teacher then mentions that the magic is most applied on some sticky balm as warlock spells of this feat are unable to create that sort of substance and she tell the characters to find the Alchemy club
