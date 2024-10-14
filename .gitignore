@@ -2,8 +2,8 @@ Pipfile
 Pipfile.lock
 .streamlit/
 5e-data/
-scrapers/
+scapers/
 test.py
 output.pdf
 .vs/
-__pycahce__/
+__pycache__/
