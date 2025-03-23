@@ -1,6 +1,7 @@
 import streamlit as st
-from utils import search_spells
+import utils
 from mongoQuery import fetchDisplayInfo
+from fillPDF import fill_pdf
 
 st.header("Character Maker")
 
@@ -11,32 +12,35 @@ import os
 import json
 
 class_options = fetchDisplayInfo("classes") 
-race_options = fetchDisplayInfo("races")
+# race_options = fetchDisplayInfo("races")
 
-race_selection = st.selectbox("Select Race:", options=race_options, key="selected_race",help="Checkout the [class](https://5e.tools/classes.html) and [race](https://5e.tools/races.html) descriptions")
+# race_selection = st.selectbox("Select Race:", options=list(race_options), key="selected_race",help="Checkout the [class](https://5e.tools/classes.html) and [race](https://5e.tools/races.html) descriptions")
 
 if 'class_amount' not in st.session_state:
     st.session_state.class_amount = 1  
 
 
-def validate_levels():
-    if sum(total_levels) > 20:
+def validate_levels(lvls):
+    if sum(lvls) > 20:
         st.warning("The total levels of all classes must not exceed 20.")
-    return sum(total_levels) > 20
+    return sum(lvls) > 20
 
 col1, col2 = st.columns(2)
 
-class_names = []
-total_levels =  []
+class_names = {}
 
 for i, level in enumerate(range(1,st.session_state.class_amount+1)):
     with col1:
-        class_names.append(st.selectbox(f"Select Class {i + 1}:", options=[cls for cls in class_options if cls not in class_names], key=f"class_{i}"))
+        cls = st.selectbox(f"Select Class {i + 1}:", options=[cls for cls in class_options['options'] if cls not in class_names], key=f"class_{i}")
     with col2:
-        total_levels.append(st.number_input(f"Select Level for Class {i + 1}:", min_value=1, max_value=20, key=f"level_{i}"))
+        lvl = st.number_input(f"Select Level for Class {i + 1}:", min_value=1, max_value=20, key=f"level_{i}")
+    
+    if cls in class_names:
+        cls = cls + ' ' + str(i)
+    class_names[cls] = lvl
 
-class_key = {cls: lvl for cls in  class_names for lvl in total_levels}
-level_check = validate_levels()
+validate_levels(class_names.values())
+
 
 with col1:
     if st.session_state.class_amount == 13:
@@ -56,15 +60,39 @@ if add_class_button:
     st.rerun()
 
 
+
 generate_button = st.button("Generate Character", use_container_width=True)
 
 if generate_button:
-    if user_prompt:
-        st.info("Generating character... This may take a moment.")
+    with st.spinner("Please wait as we cook... This can take a minute"):
+    
+        if user_prompt:
+            traits = utils.generateCharacterTraits(user_prompt, class_names)
+            # flavour = utils.generateCharacterFlavour(user_prompt, traits.RACE)
+            # features, ability_prof = utils.generateCharacterFeatures(user_prompt,traits)
+            st.write(traits)
+            # st.write(flavour)
+            # st.write(features)
+            
 
-        st.success("Character generated successfully!")
-    else:
-        st.warning("Please enter a character description before generating.")
+            # pdf_display, pdf_bytes = fill_pdf(
+            #     total_level=sum(class_names.values()), 
+            #     proficiencies=features.Skill_Prof+list(ability_prof), 
+            #     traits=traits, 
+            #     flavour=flavour, 
+            #     features=features
+            #     )
+            # st.markdown(pdf_display, unsafe_allow_html=True)
+            # st.download_button(
+            #    label="Download Updated PDF",
+            #    data=pdf_bytes,
+            #    file_name="updated_form.pdf",
+            #    mime="application/pdf"
+            # )
+
+            st.success("Character generated successfully!")
+        else:
+            st.warning("Please enter a character description before generating.")
 
 
 # spell_level = st.selectbox("Select Spell Level", range(1, 10))
